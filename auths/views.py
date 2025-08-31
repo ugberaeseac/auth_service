@@ -3,6 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import RegisterSerializer, ForgotPasswordSerializer, ResetPasswordConfirmationSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 class RegisterAPIView(generics.GenericAPIView):
@@ -21,6 +22,7 @@ class RegisterAPIView(generics.GenericAPIView):
 class ForgotPasswordAPIView(generics.GenericAPIView):
     serializer_class = ForgotPasswordSerializer
     permission_classes = [AllowAny]
+    throttle_scope = 'forgot_pass'
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -34,6 +36,7 @@ class ForgotPasswordAPIView(generics.GenericAPIView):
 class ResetPasswordConfirmAPIView(generics.GenericAPIView):
     serializer_class = ResetPasswordConfirmationSerializer
     permission_classes = [AllowAny]
+    throttle_scope = 'reset_pass'
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -43,3 +46,7 @@ class ResetPasswordConfirmAPIView(generics.GenericAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
+class LoginAPIView(TokenObtainPairView):
+    permission_classes = [AllowAny]
+    throttle_scope = 'login'
