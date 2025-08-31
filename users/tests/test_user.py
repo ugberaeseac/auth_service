@@ -35,7 +35,7 @@ class UsersAPITests(TestCase):
 
     def test_user_list_requires_admin_status(self):
         response = self.client.get(self.list_url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
         self.client.force_authenticate(self.alice)
         response = self.client.get(self.list_url)

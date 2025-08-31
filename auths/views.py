@@ -20,7 +20,7 @@ class RegisterAPIView(generics.GenericAPIView):
 
 class ForgotPasswordAPIView(generics.GenericAPIView):
     serializer_class = ForgotPasswordSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -33,7 +33,7 @@ class ForgotPasswordAPIView(generics.GenericAPIView):
 
 class ResetPasswordConfirmAPIView(generics.GenericAPIView):
     serializer_class = ResetPasswordConfirmationSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
