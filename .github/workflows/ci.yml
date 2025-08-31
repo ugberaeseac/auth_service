@@ -29,6 +29,16 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DB_NAME: ${{ secrets.DB_NAME }}
@@ -38,6 +48,7 @@ jobs:
       DB_PORT: ${{ secrets.DB_PORT }}
       REDIS_URL: ${{ secrets.REDIS_URL }}
       ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+      CI: "true"
 
     steps:
       - name: Checkout code
