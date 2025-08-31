@@ -41,7 +41,7 @@ class ForgotPasswordSerializer(serializers.Serializer):
             cache.set(key, token, timeout=600)
             reset_link = f'http://127.0.0.1:8000/api/auth/password/reset/?user_id={user_id}&token={token}'
 
-            subject = f'Password Rest Request for {user.email}'
+            subject = f'Password Reset Request for {user.email}'
             message = f"""
             Hello {user.first_name},
 
@@ -83,6 +83,7 @@ class ResetPasswordConfirmationSerializer(serializers.Serializer):
         except User.DoesNotExist:
             raise serializers.ValidationError({'user_id': 'Invalid User ID'})
 
+    
         if user:
             user.set_password(new_password)
             user.save()
