@@ -1,8 +1,7 @@
 
 # Django Authentication Service
 
-A **Django-based authentication system** with JWT support, PostgreSQL, Redis caching, email-based password reset, and built-in rate limiting on authentication endpoints.  
-This project is deployed on **Render** with integrated API documentation (Swagger, ReDoc, and Postman).  
+A **Django-based authentication system** with JWT support, PostgreSQL, Redis caching, email-based password reset, and built-in rate limiting on authentication endpoints. This project is deployed on **Render** with integrated API documentation (Swagger, ReDoc, and Postman).  
 
 ---
 
